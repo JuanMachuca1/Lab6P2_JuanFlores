@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class Consola {
     
-    private String identificacion;
-    private String fabricante;
-    private int añosDeUso;
-    private double precio;
-    private ArrayList juegos = new ArrayList();
-    private String modelo;
+    protected String identificacion;
+    protected String fabricante;
+    protected int añosDeUso;
+    protected double precio;
+    private ArrayList<juego> juegos = new ArrayList();
+    protected String modelo;
 
     public Consola() {
     }
