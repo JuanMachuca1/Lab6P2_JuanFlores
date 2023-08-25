@@ -6,6 +6,7 @@ package lab6p2_juanflores;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,6 +30,9 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MenuLista = new javax.swing.JPopupMenu();
+        Modificar = new javax.swing.JMenuItem();
+        Eliminar = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         InventarioConsola = new javax.swing.JTabbedPane();
@@ -89,6 +93,14 @@ public class Principal extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Consolas = new javax.swing.JTable();
+
+        Modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lab6p2_juanflores/mod.png"))); // NOI18N
+        Modificar.setText("Modificar");
+        MenuLista.add(Modificar);
+
+        Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lab6p2_juanflores/delete.png"))); // NOI18N
+        Eliminar.setText("Eliminar");
+        MenuLista.add(Eliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -483,26 +495,17 @@ public class Principal extends javax.swing.JFrame {
 
         Consolas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Identificacion", "Fabricante", "Años de Uso", "Modelo", "Precio", "Num Controles", "Almacenamiento", "Tipo Conexion", "Tamaño Pantalla", "Bateria", "Estuche"
             }
         ));
+        Consolas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ConsolasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Consolas);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -571,16 +574,31 @@ public class Principal extends javax.swing.JFrame {
     private void btn_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregarMouseClicked
        
         boolean estu=true;
-        
+        String estuche="Si";
         if(cb_estuche.getSelectedItem()=="No"){
-            
+            estuche = "No";
             estu=false;
 
         }
             
            consolas.add(new Portatil((String) cb_tipoPantalla.getSelectedItem(),(int) Bateria.getValue(), estu,txt_identificacion.getText(),txt_fabricante1.getText(), Integer.parseInt(txt_año.getText()), Double.parseDouble(txt_precio1.getText()), txt_modelo.getText()));
 
-              
+          DefaultTableModel modelo = (DefaultTableModel) Consolas.getModel();
+        
+          Object []infor = new Object[11];
+       
+          infor[0] = txt_identificacion.getText();
+          infor[1] = txt_fabricante1.getText();
+          infor[2] = txt_año.getText();
+          infor[5] = txt_precio1.getText();
+          infor[4] = txt_modelo.getText();
+          infor[8] = (cb_tipoPantalla.getSelectedItem().toString());
+          infor[9] = Integer.toString((int)Bateria.getValue());
+          infor[10] = estuche;
+         
+       
+        modelo.addRow(infor);
+           
         
         JOptionPane.showMessageDialog(this, "Consola agregada");
     }//GEN-LAST:event_btn_agregarMouseClicked
@@ -592,6 +610,26 @@ public class Principal extends javax.swing.JFrame {
     private void btn_agregarEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregarEMouseClicked
         
         consolas.add(new Estacionaria((int)ControlesR.getValue(),Integer.parseInt(txt_almacenamiento.getText()), ConexionE.getText(), txt_identificacionE.getText(),txt_fabricanteE.getText() , Integer.parseInt(txt_añoE.getText()), Double.parseDouble(txt_precioE.getText()), txt_modeloE.getText()));
+        
+       
+        
+        DefaultTableModel modelo = (DefaultTableModel) Consolas.getModel();
+        
+       Object []info = new Object[11];
+       
+       info[5] = Integer.toString((int) ControlesR.getValue());
+       info[6] = (txt_almacenamiento.getText());
+       info[7] = ConexionE.getText();
+       info[0] = txt_identificacionE.getText();
+       info[1] = txt_fabricanteE.getText();
+       info[2] = txt_añoE.getText();
+       info[5] = txt_precioE.getText();
+       info[4] = txt_modeloE.getText();
+       
+       modelo.addRow(info);
+       
+       
+        
         
         JOptionPane.showMessageDialog(this, "Consola Agregada");
     }//GEN-LAST:event_btn_agregarEMouseClicked
@@ -616,6 +654,17 @@ public class Principal extends javax.swing.JFrame {
        JOptionPane.showMessageDialog(this, "Juego agregado Correctamente");
        
     }//GEN-LAST:event_btn_juegoMouseClicked
+
+    private void ConsolasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConsolasMouseClicked
+        if(Consolas.getSelectedRow()>=0){
+            
+            if(evt.isMetaDown()){
+                
+                MenuLista.show(evt.getComponent(), getX(), getY());
+                
+            }
+        }
+    }//GEN-LAST:event_ConsolasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -657,8 +706,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField ConexionE;
     private javax.swing.JTable Consolas;
     private javax.swing.JSpinner ControlesR;
+    private javax.swing.JMenuItem Eliminar;
     private javax.swing.JComboBox<String> EstadoJuego;
     private javax.swing.JTabbedPane InventarioConsola;
+    private javax.swing.JPopupMenu MenuLista;
+    private javax.swing.JMenuItem Modificar;
     private javax.swing.JTextField NombreJuego;
     private javax.swing.JComboBox<String> agregadoJuego1;
     private javax.swing.JButton btn_agregar;
