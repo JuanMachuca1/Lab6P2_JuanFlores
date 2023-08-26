@@ -992,19 +992,22 @@ public class Principal extends javax.swing.JFrame {
        boolean agregado = true;
        String estado="Nuevo";
        
-       if (EstadoJuego.getSelectedItem() == "Usado"){
+       if (EstadoJuego1.getSelectedItem() == "Usado"){
            estado = "Usado";
        }
-       if (rentaJuego.getSelectedItem()=="No"){
+       if (rentaJuego1.getSelectedItem()=="No"){
            rentado=false;
        }
-       if (agregadoJuego1.getSelectedItem()=="No"){
+       if (agregadoJuego2.getSelectedItem()=="No"){
            agregado=false;
        }
        
-       juegoss.add(new juego(NombreJuego.getText(), descripcionJuego.getText(), fechaaLan.getDate() , Integer.parseInt(precioJurego.getText()), estado, rentado, agregado,(int) juegosDisponibles.getValue()));
+       juegoss.add(new juego(NombreJuego1.getText(), descripcionJuego1.getText(), fechaaLan1.getDate() , Integer.parseInt(precioJurego1.getText()), estado, rentado, agregado,(int) juegosDisponibles1.getValue()));
        
        JOptionPane.showMessageDialog(this, "Juego agregado Correctamente");
+       
+       
+       
     }//GEN-LAST:event_btn_juego1MouseClicked
 
     private void AgregarJuegosConsolaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarJuegosConsolaActionPerformed
