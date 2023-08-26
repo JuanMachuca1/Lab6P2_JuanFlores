@@ -60,6 +60,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         juegosDisponibles1 = new javax.swing.JSpinner();
         Mod = new javax.swing.JDialog();
+        Mod1 = new javax.swing.JDialog();
         EliminarConsolas = new javax.swing.JDialog();
         jPanel6 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
@@ -319,6 +320,17 @@ public class Principal extends javax.swing.JFrame {
         );
         ModLayout.setVerticalGroup(
             ModLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 508, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout Mod1Layout = new javax.swing.GroupLayout(Mod1.getContentPane());
+        Mod1.getContentPane().setLayout(Mod1Layout);
+        Mod1Layout.setHorizontalGroup(
+            Mod1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 595, Short.MAX_VALUE)
+        );
+        Mod1Layout.setVerticalGroup(
+            Mod1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 508, Short.MAX_VALUE)
         );
 
@@ -976,7 +988,23 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_EliminarConsolaMouseClicked
 
     private void btn_juego1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_juego1MouseClicked
-        // TODO add your handling code here:
+         boolean rentado = true;
+       boolean agregado = true;
+       String estado="Nuevo";
+       
+       if (EstadoJuego.getSelectedItem() == "Usado"){
+           estado = "Usado";
+       }
+       if (rentaJuego.getSelectedItem()=="No"){
+           rentado=false;
+       }
+       if (agregadoJuego1.getSelectedItem()=="No"){
+           agregado=false;
+       }
+       
+       juegoss.add(new juego(NombreJuego.getText(), descripcionJuego.getText(), fechaaLan.getDate() , Integer.parseInt(precioJurego.getText()), estado, rentado, agregado,(int) juegosDisponibles.getValue()));
+       
+       JOptionPane.showMessageDialog(this, "Juego agregado Correctamente");
     }//GEN-LAST:event_btn_juego1MouseClicked
 
     private void AgregarJuegosConsolaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarJuegosConsolaActionPerformed
@@ -1043,6 +1071,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane InventarioConsola;
     private javax.swing.JPopupMenu MenuLista;
     private javax.swing.JDialog Mod;
+    private javax.swing.JDialog Mod1;
     private javax.swing.JMenuItem Modificar;
     private javax.swing.JTextField NombreJuego;
     private javax.swing.JTextField NombreJuego1;
