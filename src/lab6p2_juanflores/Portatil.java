@@ -54,7 +54,7 @@ public class Portatil extends Consola{
 
     @Override
     public String toString() {
-        return "Portatil{" + "tama\u00f1oPantalla=" + tamañoPantalla + ", bateria=" + bateria + ", estuche=" + estuche + '}';
+        return identificacion;
     }
     
     
